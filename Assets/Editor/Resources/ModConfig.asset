@@ -14,12 +14,8 @@ MonoBehaviour:
   id: FindTheInvisibleCowModule
   title: Find The Invisible Cow
   author: Quinn Wuest
-  description: 'Find The Invisible Cow
-
-
-    Manual by Deaf
-
-    Developed by Quinn Wuest'
+  description: "Because it ain\u2019t gonna find itself.\n\nManual by Deaf\nDeveloped
+    by Quinn Wuest"
   version: 1.0
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 2bfb71c59ac371b4d97512fe375dcb4d, type: 3}

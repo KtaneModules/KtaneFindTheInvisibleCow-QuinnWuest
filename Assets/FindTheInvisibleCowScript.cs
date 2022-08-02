@@ -44,7 +44,8 @@ public class FindTheInvisibleCowScript : MonoBehaviour
             }
         };
         _cowCowCow = StartCoroutine(CowCowCow());
-        _goalCow = Rnd.Range(0, 324);
+        while (_goalCow % 18 < 2 || _goalCow % 18 > 16 || _goalCow / 18< 2 || _goalCow / 18 > 16)
+            _goalCow = Rnd.Range(0, 324);
         Debug.LogFormat("[Find The Invisible Cow #{0}] Goal: {1}", _moduleId, _goalCow);
         GetAdjacents();
         CowQuad.transform.localPosition = new Vector3(0.01f * (_goalCow % 18) - 0.085f, 0.0151f, -0.01f * (_goalCow / 18) + 0.085f);
@@ -212,7 +213,7 @@ public class FindTheInvisibleCowScript : MonoBehaviour
             {
                 var arr = new string[] { "UP", "RIGHT", "DOWN", "LEFT" };
                 yield return "sendtochaterror After " + i + " moves, you attempted to move the cursor " + arr[list[i]] + ", which would have moved you off the grid. Stopping command.";
-                _highlightedCells[_cPos] = false;
+                _highlightedCells[_cPos] = _constantShouting;
                 yield break;
             }
             var oldPos = _cPos;
