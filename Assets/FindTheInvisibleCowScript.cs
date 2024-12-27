@@ -20,10 +20,10 @@ public class FindTheInvisibleCowScript : MonoBehaviour
     private static int _moduleIdCounter = 1;
     private bool _moduleSolved;
 
-    private bool[] _highlightedCells = new bool[324];
+    private readonly bool[] _highlightedCells = new bool[324];
     private bool _foundCow;
     private Coroutine _cowCowCow;
-    private int[] _cowSoundCells = new int[324];
+    private readonly int[] _cowSoundCells = new int[324];
     private int _goalCow;
 
     private bool TwitchPlaysActive;
@@ -44,7 +44,7 @@ public class FindTheInvisibleCowScript : MonoBehaviour
             }
         };
         _cowCowCow = StartCoroutine(CowCowCow());
-        while (_goalCow % 18 < 2 || _goalCow % 18 > 16 || _goalCow / 18< 2 || _goalCow / 18 > 16)
+        while (_goalCow % 18 < 2 || _goalCow % 18 > 16 || _goalCow / 18 < 2 || _goalCow / 18 > 16)
             _goalCow = Rnd.Range(0, 324);
         Debug.LogFormat("[Find The Invisible Cow #{0}] Goal: {1}", _moduleId, _goalCow);
         GetAdjacents();
@@ -161,6 +161,7 @@ public class FindTheInvisibleCowScript : MonoBehaviour
         if (Regex.Match(command, @"^\s*submit\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant).Success)
         {
             yield return null;
+            yield return "solve";
             CowSels[_cPos].OnInteract();
             yield break;
         }
@@ -247,8 +248,8 @@ public class FindTheInvisibleCowScript : MonoBehaviour
             var elapsed = 0f;
             while (elapsed < duration)
             {
-                
-                CursorObj.transform.localPosition = new Vector3( Mathf.Lerp(0.01f * (_cPos % 18) - 0.085f, 0.01f * (g % 18) - 0.085f, elapsed / duration), 0.0153f, Mathf.Lerp(-0.01f * (_cPos / 18) + 0.085f, -0.01f * (g / 18) + 0.085f, elapsed / duration));
+
+                CursorObj.transform.localPosition = new Vector3(Mathf.Lerp(0.01f * (_cPos % 18) - 0.085f, 0.01f * (g % 18) - 0.085f, elapsed / duration), 0.0153f, Mathf.Lerp(-0.01f * (_cPos / 18) + 0.085f, -0.01f * (g / 18) + 0.085f, elapsed / duration));
                 yield return null;
                 elapsed += Time.deltaTime;
             }
